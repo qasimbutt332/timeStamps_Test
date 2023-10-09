@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 app.get('/api/:date?', (req, res) => {
-  let dateParam = req.params.date;
+  let dateParam = req.query.date;
 
   if (!dateParam) {
     dateParam = new Date();
@@ -16,7 +16,7 @@ app.get('/api/:date?', (req, res) => {
       });
       return;
     } else {
-      res.json({ error: 'Invalid Date' });
+      res.json({ error: "Invalid Date" }); // Provide the error message directly
       return;
     }
   }
@@ -26,6 +26,7 @@ app.get('/api/:date?', (req, res) => {
     utc: new Date().toUTCString(),
   });
 });
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
